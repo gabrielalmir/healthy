@@ -8,6 +8,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/fatih/color"
 	"github.com/urfave/cli/v2"
 )
 
@@ -48,7 +49,7 @@ func main() {
 				for {
 					fmt.Println(PerformHealthCheck(c.String("domain"), port))
 					time.Sleep(5 * time.Second)
-					fmt.Println(strings.Repeat("-", 20))
+					fmt.Println(strings.Repeat("-", 30))
 				}
 			} else {
 				fmt.Println(PerformHealthCheck(c.String("domain"), port))
@@ -73,8 +74,10 @@ func PerformHealthCheck(domain, port string) string {
 
 	if err != nil {
 		status = fmt.Sprintf("[DOWN] %v is unreachable, error: %v", address, err)
+		status = color.RedString(status)
 	} else {
 		status = fmt.Sprintf("[UP] %v is reachable\nFrom: %v\nTo: %v", address, conn.LocalAddr(), conn.RemoteAddr())
+		status = color.GreenString(status)
 	}
 
 	defer conn.Close()
