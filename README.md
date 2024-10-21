@@ -11,15 +11,11 @@
 - **Simple Output**: Get clear status messages indicating whether the service is UP or DOWN.
 
 ## Installation
-1. Install Go from the official site: https://golang.org/dl/.
-2. Clone this repository or copy the code into a file called `main.go`.
-3. Run the following command to install necessary dependencies:
+1. Install Bun.js from the official site: https://bun.sh/.
+2. Clone this repository or copy the code into a file called `health_check.ts`.
+3. Install the necessary dependencies using Bun:
    ```bash
-   go get github.com/urfave/cli/v2
-   ```
-4. Build the executable:
-   ```bash
-   go build -o healthy main.go
+   bun add commander kleur
    ```
 
 ## Usage
@@ -28,30 +24,30 @@ You can use the `healthy` CLI tool by passing the domain and optional port as fl
 ### Basic Health Check
 To check a domain's health on the default port (80):
 ```bash
-./healthy --domain example.com
+bun run health_check.ts --domain example.com
 ```
 
 ### Custom Port
 To check a specific port (e.g., port 8080):
 ```bash
-./healthy --domain example.com --port 8080
+bun run health_check.ts --domain example.com --port 8080
 ```
 
 ### Loop Mode
 To continuously check the health every 5 seconds:
 ```bash
-./healthy --domain example.com --loop
+bun run health_check.ts --domain example.com --loop
 ```
 
 You can also use the shorter flag forms:
 ```bash
-./healthy -d example.com -p 8080 -l
+bun run health_check.ts -d example.com -p 8080 -l
 ```
 
 ### Flags
 - `--domain` or `-d`: (Required) The domain to check.
 - `--port` or `-p`: (Optional) The port number to check (defaults to `80`).
-- `--loop` or `-l`: (Optional) Continuously check the service every 5 seconds (defaults to `true`).
+- `--loop` or `-l`: (Optional) Continuously check the service every 5 seconds (defaults to `false`).
 
 ## Example Output
 ```bash
